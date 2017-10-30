@@ -6,10 +6,10 @@ const {app} = require('./../server');
 const {Todo} = require('./../models/todo');
 
 const todos = [{
-  _id: new ObjectID,
+  _id: new ObjectID(),
   text: 'First test todo'
 }, {
-  _id: new ObjectID,
+  _id: new ObjectID(),
   text: 'Second test todo'
 }];
 
@@ -73,7 +73,7 @@ describe('GET /todos', () => {
   });
 });
 
-describe('GET /todos', () => {
+describe('GET /todos/:id', () => {
   it('should return todo doc', (done) => {
     request(app)
       .get(`/todos/${todos[0]._id.toHexString()}`)
@@ -85,6 +85,8 @@ describe('GET /todos', () => {
   });
 
   it('should return 404 if todo not found', (done) => {
+
+
     request(app)
       .get(`/todos/${ObjectID().toHexString()}`)
       .expect(404)
